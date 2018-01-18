@@ -25,7 +25,6 @@ const addExpense = (
 // STATE - is static, previous, saved, existed data that we read from
 const expansesReducerDefaultState = [];
 const expensesReducer = (state = expansesReducerDefaultState, action) => {
-  console.log('ACTION: ', action);
   switch (action.type) {
     case 'ADD_EXPENSE':
       return [
@@ -68,6 +67,27 @@ const filterReducer = (state = filterReducerDefaultState, action) => {
         ...state,
         text: action.text
       }
+    case 'SORT_BY_DATE':
+      return {
+        ...state,
+        sortBy: 'date'
+      }
+    case 'SORT_BY_AMOUNT':
+      return {
+        ...state,
+        sortBy: 'amount'
+      }
+    case 'SET_START_DATE':
+      return {
+        ...state,
+        startDate: action.date
+      }
+    case 'SET_END_DATE':
+    console.log(state);
+      return {
+        ...state,
+        endDate: action.date
+      }
     default:
       return state;
   }
@@ -91,7 +111,31 @@ const setTextFilter = (text = '') => ({
   type: 'SET_TEXT',
   text
 })
-// Store creation - stores functions
+
+// Action Generator - SORT_BY_AMOUNT
+const sortByAmount = () => ({
+ type: 'SORT_BY_AMOUNT'
+
+})
+
+// AG - SORT_BY_DATE
+const sortByDate = () => ({
+  type: 'SORT_BY_DATE'
+});
+
+// AG - sort by start date
+const setStartDate = (date = '') => ({
+  type: 'SET_START_DATE',
+  date
+});
+
+// AG - sort by end date
+const setEndDate = (date = '') => ({
+  type: 'SET_END_DATE',
+  date
+});
+
+// 1. Store creation - stores functions
 const store = createStore(
   combineReducers({
     expenses: expensesReducer,
@@ -111,16 +155,26 @@ const expenseOne = store.dispatch(addExpense(
     amount: 10000
   }
 ));
-const expenseTwo = store.dispatch(addExpense({ description: 'Rent for the apartment', amount: 1000 }));
+// const expenseTwo = store.dispatch(addExpense({ description: 'Rent for the apartment', amount: 1000 }));
+//
+// // send info about removing the sepcific object with exact id
+// store.dispatch(removeExpense({ id: expenseTwo.expense.id }))
+//
+// store.dispatch(editExpanse(expenseOne.expense.id, { amount: 500 }));
+// store.dispatch(editExpanse(expenseOne.expense.id, { note: 'this was actually from the previous month'}))
+//
+// // Setting text for filtering
+// store.dispatch(setTextFilter('Income in January'));
+// store.dispatch(setTextFilter());
+//
+// console.log(expenseOne);
+// // Sorting data
+// store.dispatch(sortByAmount());
+// store.dispatch(sortByDate());
 
-// send info about removing the sepcific object with exact id
-store.dispatch(removeExpense({ id: expenseTwo.expense.id }))
-
-store.dispatch(editExpanse(expenseOne.expense.id, { amount: 500 }));
-store.dispatch(editExpanse(expenseOne.expense.id, { note: 'this was actually from the previous month'}))
-
-store.dispatch(setTextFilter('Income in January'));
-store.dispatch(setTextFilter());
+store.dispatch(setStartDate(125));
+store.dispatch(setStartDate());
+store.dispatch(setEndDate(1250));
 
 const demoState = {
   expenses: [{
@@ -137,14 +191,3 @@ const demoState = {
     endDate: undefined
   }
 };
-
-// Object rest spread transform -> required babel plugin to tranfsorm `...`
-const user = {
-  name: 'Jen',
-  age: '21'
-}
-console.log({
-  country: 'US',
-  ...user,
-  nice:'culture'
-});
