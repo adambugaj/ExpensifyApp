@@ -143,38 +143,70 @@ const store = createStore(
   })
 );
 
+// Get visible expenses
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  console.log(text === '');
+  return expenses.filter((expense) => {
+    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+    const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+    const textToLowerCase = expense.description.toLowerCase()
+
+    const textMatch = textToLowerCase.includes(text.toLowerCase());
+    return startDateMatch && endDateMatch && textMatch;
+  }).sort((a,b) => {
+
+    if (sortBy === 'date') {
+      return a.createdAt < b.createdAt ? 1 : -1;
+    } else if (sortBy === 'amount') {
+      return a.amount > b.amount ? 1 : -1;
+    }
+  });
+};
+const expenseOne = store.dispatch(addExpense(
+  {
+    description: 'Income in January rent1',
+    amount: 10000,
+    createdAt: -21000
+  }));
 // monitor the changes made by store (up above)
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
 // Send any new data to combineReducers (expenses and filters) in store
-const expenseOne = store.dispatch(addExpense(
-  {
-    description: 'Income in January',
-    amount: 10000
-  }
-));
-// const expenseTwo = store.dispatch(addExpense({ description: 'Rent for the apartment', amount: 1000 }));
-//
+
+const expenseTwo = store.dispatch(addExpense({
+  description: 'Rent for the apartment nt1',
+  amount: 1000,
+  createdAt: -2000
+}));
+
+const expenseThree = store.dispatch(addExpense({
+  description: 'Incme for the work nt1',
+  amount: 1300,
+  createdAt: -200011
+}));
+
 // // send info about removing the sepcific object with exact id
 // store.dispatch(removeExpense({ id: expenseTwo.expense.id }))
 //
 // store.dispatch(editExpanse(expenseOne.expense.id, { amount: 500 }));
-// store.dispatch(editExpanse(expenseOne.expense.id, { note: 'this was actually from the previous month'}))
+// store.dispatch(editExpanse(expenseOne.expense.id, { note: 'this was actually from the previous month'}));
 //
 // // Setting text for filtering
-// store.dispatch(setTextFilter('Income in January'));
+store.dispatch(setTextFilter('nt1'));
 // store.dispatch(setTextFilter());
 //
 // console.log(expenseOne);
 // // Sorting data
-// store.dispatch(sortByAmount());
-// store.dispatch(sortByDate());
+store.dispatch(sortByAmount());
+//store.dispatch(sortByDate());
 
-store.dispatch(setStartDate(125));
-store.dispatch(setStartDate());
-store.dispatch(setEndDate(1250));
+// store.dispatch(setStartDate(1000));
+// // store.dispatch(setStartDate());
+ store.dispatch(setEndDate(-250));
 
 const demoState = {
   expenses: [{
