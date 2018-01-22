@@ -15,12 +15,6 @@ const ExpenseList = (props) => {
   );
 };
 
-
-setTimeout(() => {
-
-}, 3000)
-
-
 const mapStateToProps = (state) => {
   console.log(state);
   return {

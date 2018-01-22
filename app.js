@@ -46,6 +46,7 @@ const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 console.log(visibleExpenses);
 
+// connect store with every components - allow download the data
 const jsx = (
   <Provider store={store}>
     <AppRouter />
