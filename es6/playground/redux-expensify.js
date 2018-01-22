@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
 
+// ACTIONS
 // ADD_EXPENSE
 const addExpense = (
   {
@@ -20,6 +21,19 @@ const addExpense = (
   }
 });
 
+// Action Generator - REMOVE_EXPENSE
+const removeExpense = ({id} = {}) => ({
+  type: 'REMOVE_EXPENSE',
+  id
+})
+
+// Action Generator - EDIT_EXPENSE
+const editExpanse = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  updates
+});
+
 // Expanses Reducer - function which store stores
 // ACTION - is updates, changes, the new data sent by a user
 // STATE - is static, previous, saved, existed data that we read from
@@ -35,7 +49,7 @@ const expensesReducer = (state = expansesReducerDefaultState, action) => {
       return state.filter(({ id }) => {
         return id !== action.id;
       });
-    case 'EDIT_EXPANSE':
+    case 'EDIT_EXPENSE':
       return state.map((expense) => {
         console.log('STATE: ', state);
         if (expense.id === action.id) {
@@ -93,19 +107,7 @@ const filterReducer = (state = filterReducerDefaultState, action) => {
   }
 };
 
-// Action Generator - REMOVE_EXPENSE
-const removeExpense = ({id} = {}) => ({
-  type: 'REMOVE_EXPENSE',
-  id
-})
-
-// Action Generator - EDIT_EXPANSE
-const editExpanse = (id, updates) => ({
-  type: 'EDIT_EXPANSE',
-  id,
-  updates
-});
-
+//FILTERS:
 // Action Generator - SET_TEXT - set new text
 const setTextFilter = (text = '') => ({
   type: 'SET_TEXT',
