@@ -28,18 +28,23 @@ const store = configureStore();
 const waterBill = store.dispatch(addExpense({
   description: 'Payment for a water bill',
   note: 'ASAP',
-  amount: 200,
+  amount: 2800,
   createdAt: '22.01.2018'
 }));
 
 const gasBill = store.dispatch(addExpense({
   description: 'Payment for a gas bill',
   note: 'soon',
-  amount: 100,
-  createdAt: '21.01.2018'
+  amount: 190,
+  createdAt: '23.01.2018'
 }));
 
-store.dispatch(setTextFilter('bill'));
+store.dispatch(addExpense({
+  description: 'Rent',
+  note: 'soon',
+  amount: 1000,
+  createdAt: '24.01.2018'
+}));
 
 // Check if correct
 const state = store.getState();
