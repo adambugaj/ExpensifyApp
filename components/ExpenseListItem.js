@@ -1,15 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { removeExpense } from '.././actions/expenses';
+import { Link } from 'react-router-dom';
 
+// we don't need dispatch anymore, because we dont send info about removing a review from the home page
 const ExpenseListItem = ({description, amount, createdAt, id, dispatch}) => {
   return (
     <div>
-      <h1>{description}</h1>
+      <Link to={`/edit/${id}`}>
+      <h3>{description}</h3>
+      </Link>
       <p>Amount: {amount} Date: {createdAt}</p>
-      <button onClick={() => {dispatch(removeExpense({id}))}}>Remove</button>
+      <button><Link to={`/edit/${id}`}>Edit</Link></button>
     </div>
   )
 }
 
-export default connect()(ExpenseListItem);
+export default ExpenseListItem;

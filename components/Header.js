@@ -10,6 +10,6 @@ const Header = () => {
       <button><NavLink to="/help" activeClassName="is-active">Help</NavLink></button>
     </header>
   );
-}
+};
 
 export default Header;
