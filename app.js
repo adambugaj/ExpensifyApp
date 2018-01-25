@@ -11,39 +11,40 @@ import getVisibleExpenses from './selectors/expenses';
 
 const store = configureStore();
 
+/*
+//Place it onto the screen
+store.subscribe(() => {
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
+});
 
-// Place it onto the screen
-// store.subscribe(() => {
-//   const state = store.getState();
-//   const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
-//   console.log(visibleExpenses);
-// });
-
-// const expenseThree = store.dispatch(addExpense({
-//   description: 'Incme for the work nt1',
-//   amount: 1300,
-//   createdAt: -200011
-// }));
+const expenseThree = store.dispatch(addExpense({
+  description: 'Incme for the work nt1',
+  amount: 1300,
+  createdAt: -200011
+}));
+*/
 
 const waterBill = store.dispatch(addExpense({
   description: 'Payment for a water bill',
   note: 'ASAP',
   amount: 2800,
-  createdAt: '22.01.2018'
+  createdAt: '15149770000'
 }));
 
 const gasBill = store.dispatch(addExpense({
   description: 'Payment for a gas bill',
   note: 'soon',
   amount: 190,
-  createdAt: '23.01.2018'
+  createdAt: '1514977200000'
 }));
 
 store.dispatch(addExpense({
   description: 'Rent',
   note: 'soon',
   amount: 1000,
-  createdAt: '24.01.2018'
+  createdAt: '1515668400000'
 }));
 
 // Check if correct

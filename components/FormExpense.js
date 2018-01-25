@@ -41,7 +41,7 @@ export default class FormExpense extends React.Component {
     // make it fixed
     if (getVal.match(/^\d{1,}(\.\d{0,2})?$/)) {
       this.setState(() => ({ amount: getVal }));
-    }
+    };
 
 
 // My idea for solving it

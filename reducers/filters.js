@@ -1,10 +1,13 @@
+import moment from 'moment';
+
 // Filter Reducer default
 const filterReducerDefaultState = {
   text: '',
   sortBy: 'date',
-  startDate: undefined,
-  endDate: undefined
+  startDate: moment().startOf('month'),
+  endDate: moment().endOf('month')
 };
+
 // Filter Reducer - function which store stores
 export default (state = filterReducerDefaultState, action) => {
   switch (action.type) {

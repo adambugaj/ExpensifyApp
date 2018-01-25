@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// we don't need dispatch anymore, because we dont send info about removing a review from the home page
+// we don't need dispatch as parameter, because we dont send info about removing a review from the home page
 const ExpenseListItem = ({description, amount, createdAt, id, dispatch}) => {
   return (
     <div>
